@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+*.sqlite3
+db.sqlite3
+.env.local
+.venv/
+venv/
+*.log
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
