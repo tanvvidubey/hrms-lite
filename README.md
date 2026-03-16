@@ -1,6 +1,6 @@
 # HRMS Lite
 
-A lightweight Human Resource Management System for managing employee records and daily attendance. Single admin, no authentication.
+A lightweight Human Resource Management System for managing employee records and daily attendance.
 
 ## Tech stack
 
@@ -67,42 +67,3 @@ A lightweight Human Resource Management System for managing employee records and
 | Variable | Description |
 |----------|-------------|
 | `VITE_API_BASE_URL` | Full backend API base URL (e.g. `https://your-backend.onrender.com/api`) |
-
-## API reference
-
-Base path: `/api/`
-
-### Employees
-
-- `GET /api/employees/` — List (paginated). Response: `{ "count", "results": [...] }`
-- `POST /api/employees/` — Create. Body: `employee_id`, `name`, `email`, optional `department`, `designation`
-- `GET /api/employees/<id>/` — Retrieve
-- `PATCH /api/employees/<id>/` — Partial update
-- `DELETE /api/employees/<id>/` — Delete
-
-### Attendance
-
-- `GET /api/attendance/` — List. Query: `employee`, `date_from`, `date_to`
-- `POST /api/attendance/` — Create. Body: `employee` (UUID), `date` (YYYY-MM-DD), `status` (PRESENT \| ABSENT \| HALF_DAY)
-- `GET /api/attendance/<id>/` — Retrieve
-- `PATCH /api/attendance/<id>/` — Partial update
-- `DELETE /api/attendance/<id>/` — Delete
-
-### Summary (dashboard)
-
-- `GET /api/summary/` — Query: optional `date_from`, `date_to`. Response: `total_employees`, `total_present_today`, `present_days_per_employee`
-
-Validation errors: `{ "field_name": ["message"] }`. Other errors: `{ "detail": "message" }`.
-
-## Deployment notes
-
-- **Backend (Render):** Use a Web Service. Set build command to install deps; run `python manage.py migrate` in a release command or build step; start with `gunicorn config.wsgi:application`. Add a PostgreSQL database and set `DATABASE_URL`. Set `CORS_ALLOWED_ORIGINS` to your Vercel app URL.
-- **Frontend (Vercel):** Set root to `frontend`, build command `npm run build`, output `dist`. Set `VITE_API_BASE_URL` to the Render backend API URL (e.g. `https://your-app.onrender.com/api`).
-
-See `docs/DEPLOYMENT_CHECKLIST.md` for a step-by-step deployment checklist.
-
-## Assumptions / limitations
-
-- Single admin; no login or permissions.
-- No leave, payroll, or advanced HR features.
-- One attendance record per employee per day (duplicate date for same employee returns 400).
