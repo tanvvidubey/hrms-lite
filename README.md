@@ -1,6 +1,7 @@
 # HRMS Lite
 
 A lightweight Human Resource Management System for managing employee records and daily attendance.
+Demo: https://quess-hrms-app.netlify.app/
 
 ## Tech stack
 
